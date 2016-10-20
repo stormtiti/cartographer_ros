@@ -28,7 +28,9 @@ set(PACKAGE_DEPENDENCIES
   tf2_ros
 )
 
-set(CMAKE_CXX_FLAGS "-pthread -std=c++11 -Wreorder")
+#set(CMAKE_CXX_FLAGS "-pthread -std=c++11 -Wreorder")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC -O3 -pthread -std=c++11 -Wreorder")
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libgcc -static-libstdc++")
 
 if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
   set(CMAKE_BUILD_TYPE Release)

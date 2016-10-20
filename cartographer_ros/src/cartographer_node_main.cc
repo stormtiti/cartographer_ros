@@ -165,7 +165,7 @@ class Node {
   ::ros::Subscriber odometry_subscriber_;
   ::ros::Publisher submap_list_publisher_;
   ::ros::ServiceServer submap_query_server_;
-  ::ros::Publisher scan_matched_point_cloud_publisher_;
+//  ::ros::Publisher scan_matched_point_cloud_publisher_;
   carto::common::Time last_scan_matched_point_cloud_time_ =
       carto::common::Time::min();
   ::ros::ServiceServer finish_trajectory_server_;
@@ -398,9 +398,9 @@ void Node::Initialize() {
         std::thread(&Node::SpinOccupancyGridThreadForever, this);
   }
 
-  scan_matched_point_cloud_publisher_ =
-      node_handle_.advertise<sensor_msgs::PointCloud2>(
-          kScanMatchedPointCloudTopic, kLatestOnlyPublisherQueueSize);
+//  scan_matched_point_cloud_publisher_ =
+//      node_handle_.advertise<sensor_msgs::PointCloud2>(
+//          kScanMatchedPointCloudTopic, kLatestOnlyPublisherQueueSize);
 
   finish_trajectory_server_ = node_handle_.advertiseService(
       kFinishTrajectoryServiceName, &Node::HandleFinishTrajectory, this);
@@ -562,15 +562,15 @@ void Node::PublishPoseAndScanMatchedPointCloud(
 
   // We only publish a point cloud if it has changed. It is not needed at high
   // frequency, and republishing it would be computationally wasteful.
-  if (last_pose_estimate.time != last_scan_matched_point_cloud_time_) {
-    scan_matched_point_cloud_publisher_.publish(ToPointCloud2Message(
-        carto::common::ToUniversal(last_pose_estimate.time),
-        options_.tracking_frame,
-        carto::sensor::TransformPointCloud(
-            last_pose_estimate.point_cloud,
-            tracking_to_local.inverse().cast<float>())));
-    last_scan_matched_point_cloud_time_ = last_pose_estimate.time;
-  }
+//  if (last_pose_estimate.time != last_scan_matched_point_cloud_time_) {
+//    scan_matched_point_cloud_publisher_.publish(ToPointCloud2Message(
+//        carto::common::ToUniversal(last_pose_estimate.time),
+//        options_.tracking_frame,
+//        carto::sensor::TransformPointCloud(
+//            last_pose_estimate.point_cloud,
+//            tracking_to_local.inverse().cast<float>())));
+//    last_scan_matched_point_cloud_time_ = last_pose_estimate.time;
+//  }
 }
 
 void Node::SpinOccupancyGridThreadForever() {

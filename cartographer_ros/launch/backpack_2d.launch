@@ -15,8 +15,7 @@
 -->
 
 <launch>
-  <param name="robot_description"
-    textfile="$(find cartographer_ros)/urdf/backpack_2d.urdf" />
+  <param name="robot_description" textfile="$(find cartographer_ros)/urdf/backpack_2d.urdf" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
@@ -25,6 +24,5 @@
           -configuration_directory $(find cartographer_ros)/configuration_files
           -configuration_basename backpack_2d.lua"
       output="screen">
-    <remap from="echoes" to="horizontal_laser_2d" />
   </node>
 </launch>
